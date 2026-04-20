@@ -1,0 +1,389 @@
+/* ============================================================
+   Learn Center — Global Styles
+   Pixel-identical port from includes/header.php <style> block
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Tailwind v4 theme customization (replaces tailwind.config.ts)
+   ------------------------------------------------------------------ */
+@theme {
+  /* Primary colors (blue palette) */
+  --color-primary-50:  #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* Typography */
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+
+  /* Custom animations */
+  --animate-fade-in:    fadeIn 0.5s ease-in-out;
+  --animate-slide-up:   slideUp 0.5s ease-out;
+  --animate-slide-down: slideDown 0.3s ease-out;
+  --animate-float:      float 3s ease-in-out infinite;
+  --animate-blob:       blob 7s infinite;
+  --animate-flip:       flip 0.6s ease-in-out;
+  --animate-shake:      shake 0.5s ease-in-out;
+  --animate-spin-slow:  spin 3s linear infinite;
+
+  /* Keyframes */
+  --keyframes-fadeIn: {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  };
+  --keyframes-slideUp: {
+    0%   { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0);    opacity: 1; }
+  };
+  --keyframes-slideDown: {
+    0%   { transform: translateY(-10px); opacity: 0; }
+    100% { transform: translateY(0);     opacity: 1; }
+  };
+  --keyframes-float: {
+    0%, 100% { transform: translateY(0);     }
+    50%       { transform: translateY(-10px); }
+  };
+  --keyframes-flip: {
+    0%   { transform: rotateY(0deg);   }
+    100% { transform: rotateY(180deg); }
+  };
+  --keyframes-shake: {
+    0%, 100% { transform: translateX(0);   }
+    25%       { transform: translateX(-5px); }
+    75%       { transform: translateX(5px);  }
+  };
+  --keyframes-blob: {
+    0%   { transform: translate(0px, 0px) scale(1);    }
+    33%  { transform: translate(30px, -50px) scale(1.1); }
+    66%  { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1);    }
+  };
+  --keyframes-spin: {
+    0%   { transform: rotate(0deg);   }
+    100% { transform: rotate(360deg); }
+  };
+  --keyframes-confettiFall: {
+    0%   { transform: translateY(-100vh) rotate(0deg);   opacity: 1; }
+    100% { transform: translateY(100vh)  rotate(720deg); opacity: 0; }
+  };
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+*, *::before, *::after {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ------------------------------------------------------------------
+   Scrollbar
+   ------------------------------------------------------------------ */
+::-webkit-scrollbar        { width: 8px; height: 8px; }
+::-webkit-scrollbar-track  { background: #f1f1f1; }
+::-webkit-scrollbar-thumb  { background: #888; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+.dark ::-webkit-scrollbar-track { background: #1f2937; }
+
+/* ------------------------------------------------------------------
+   Glassmorphism
+   ------------------------------------------------------------------ */
+.glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass {
+  background: rgba(17, 24, 39, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------------------------------------------------------
+   Gradient text
+   ------------------------------------------------------------------ */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ------------------------------------------------------------------
+   Card hover
+   ------------------------------------------------------------------ */
+.card-hover {
+  transition: all 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+.dark .card-hover:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------------------------------------------------------
+   Button ripple effect
+   ------------------------------------------------------------------ */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+.btn-ripple:active::after {
+  width: 200%;
+  height: 200%;
+}
+
+/* ------------------------------------------------------------------
+   Spinner
+   ------------------------------------------------------------------ */
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg);   }
+  100% { transform: rotate(360deg); }
+}
+
+/* ------------------------------------------------------------------
+   Toast
+   ------------------------------------------------------------------ */
+.toast {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 9999;
+  transform: translateX(150%);
+  transition: transform 0.3s ease;
+}
+.toast.show   { transform: translateX(0); }
+.toast.success { background: #10b981; }
+.toast.error   { background: #ef4444; }
+.toast.info    { background: #3b82f6; }
+
+/* ------------------------------------------------------------------
+   Mobile menu
+   ------------------------------------------------------------------ */
+#mobileMenu            { display: none; }
+#mobileMenu.menu-open  { display: flex; }
+
+#mobileMenuOverlay { opacity: 0; transition: opacity 0.3s ease; }
+#mobileMenu.menu-open #mobileMenuOverlay { opacity: 1; }
+
+#mobilePanel { transform: translateX(100%); transition: transform 0.3s ease; }
+#mobileMenu.menu-open #mobilePanel { transform: translateX(0); }
+
+/* ------------------------------------------------------------------
+   Flashcard flip
+   ------------------------------------------------------------------ */
+.flashcard { perspective: 1000px; }
+
+.flashcard-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flashcard-back { transform: rotateY(180deg); }
+
+/* ------------------------------------------------------------------
+   Progress ring
+   ------------------------------------------------------------------ */
+.progress-ring        { transform: rotate(-90deg); }
+.progress-ring-circle { transition: stroke-dashoffset 0.5s ease; }
+
+/* ------------------------------------------------------------------
+   Confetti
+   ------------------------------------------------------------------ */
+@keyframes confetti-fall {
+  0%   { transform: translateY(-100vh) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(100vh)  rotate(720deg); opacity: 0; }
+}
+.confetti {
+  position: fixed;
+  width: 10px; height: 10px;
+  top: -10px;
+  animation: confetti-fall 3s linear forwards;
+  z-index: 9999;
+}
+
+/* ------------------------------------------------------------------
+   Swipe animations (flashcard)
+   ------------------------------------------------------------------ */
+@keyframes swipeLeft  { to { transform: translateX(-100%); opacity: 0; } }
+@keyframes swipeRight { to { transform: translateX(100%);  opacity: 0; } }
+.swipe-left  { animation: swipeLeft  0.3s ease forwards; }
+.swipe-right { animation: swipeRight 0.3s ease forwards; }
+
+/* ------------------------------------------------------------------
+   Editor content (note view)
+   ------------------------------------------------------------------ */
+.editor-content img { max-width: 100%; border-radius: 8px; margin: 10px 0; }
+.editor-content p   { margin-bottom: 1em; }
+
+/* ------------------------------------------------------------------
+   Connection status banner
+   ------------------------------------------------------------------ */
+#connectionStatus {
+  position: fixed;
+  top: 70px; left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 18px;
+  border-radius: 20px;
+  z-index: 9997;
+  font-size: 13px;
+  font-weight: 500;
+  transition: opacity 0.5s;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------
+   Auth form inputs (from login.php / register.php)
+   ------------------------------------------------------------------ */
+.auth-input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  color: #111827;
+  font-size: 14px;
+  transition: all 0.2s;
+  outline: none;
+}
+.auth-input:focus {
+  border-color: #6366f1;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.auth-input::placeholder { color: #9ca3af; }
+
+.dark .auth-input {
+  background: #1f2937;
+  border-color: #374151;
+  color: #f9fafb;
+}
+.dark .auth-input:focus {
+  border-color: #818cf8;
+  background: #111827;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+}
+
+.auth-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 5px;
+}
+.dark .auth-label { color: #d1d5db; }
+
+.auth-btn {
+  width: 100%;
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.auth-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+.auth-btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+  transform: translateY(-1px);
+}
+
+.auth-btn-outline {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  color: #374151;
+}
+.auth-btn-outline:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.dark .auth-btn-outline {
+  background: #1f2937;
+  border-color: #374151;
+  color: #e5e7eb;
+}
+.dark .auth-btn-outline:hover {
+  background: #111827;
+  border-color: #4b5563;
+}
+
+.auth-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  font-size: 14px;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+.auth-field:focus-within .auth-icon       { color: #6366f1; }
+.dark .auth-field:focus-within .auth-icon { color: #818cf8; }
+
+/* ------------------------------------------------------------------
+   Animate on scroll
+   ------------------------------------------------------------------ */
+.animate-on-scroll { opacity: 0; }
+.animate-on-scroll.animate-slide-up { opacity: 1; }
